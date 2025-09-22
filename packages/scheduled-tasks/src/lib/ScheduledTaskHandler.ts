@@ -223,9 +223,7 @@ export class ScheduledTaskHandler {
 
 		result.inspectErr((error) => container.client.emit(ScheduledTaskEvents.ScheduledTaskError, error, piece, payload));
 
-		const value = result.unwrapOrElse((error) => {
-			throw error;
-		});
+		const value = result.unwrapOr(null);
 
 		container.client.emit(ScheduledTaskEvents.ScheduledTaskFinished, piece, value, payload);
 
